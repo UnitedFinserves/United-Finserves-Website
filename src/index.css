@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  
+  /* Logo-matched colors:
+     Logo has: deep navy blue hand, gold/amber coins, green currency */
+  --color-brand-navy:   #0B2D5E;   /* deep navy from logo hand */
+  --color-brand-royal:  #1A56DB;   /* bright blue accent */
+  --color-brand-gold:   #F0A500;   /* warm gold from coins */
+  --color-brand-green:  #22C55E;   /* logo currency green */
+  --color-brand-light:  #F4F7FB;   /* light background */
+  --color-brand-gray:   #64748b;
+  --color-brand-dark:   #071A3C;   /* darkest navy */
+}
+
+@layer base {
+  body {
+    @apply bg-brand-light text-brand-dark font-sans antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  .glass-dark {
+    @apply bg-brand-navy/90 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-royal to-brand-gold;
+  }
+  .bg-gradient-premium {
+    @apply bg-gradient-to-br from-brand-navy via-[#0f3b7c] to-brand-dark;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #1A56DB; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #F0A500; }
+
+/* Range slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0B2D5E;
+  border: 3px solid #F0A500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(11, 45, 94, 0.4);
+  transition: box-shadow 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(240, 165, 0, 0.15);
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    #F0A500 0%,
+    #F0A500 var(--value-percent, 0%),
+    rgba(255, 255, 255, 0.15) var(--value-percent, 0%),
+    rgba(255, 255, 255, 0.15) 100%
+  );
+}
