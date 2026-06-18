@@ -30,4 +30,4 @@ extract-*.cjs
 ss-*.cjs
 test-*.cjs
 *.txt
-*.png
+/*.png
