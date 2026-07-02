@@ -27,9 +27,9 @@ const contactItems = [
     label: 'Email Us',
     lines: ['ankitchauhan.1385.ac@gmail.com'],
     href: 'mailto:ankitchauhan.1385.ac@gmail.com',
-    color: 'from-amber-500 to-orange-600',
+    color: 'from-blue-500 to-orange-600',
     bg: 'bg-amber-50',
-    border: 'border-amber-100',
+    border: 'border-blue-100',
   },
   {
     icon: FaMapMarkerAlt,
@@ -61,23 +61,22 @@ const ContactUs = () => {
     <div className="bg-[#F4F7FB] min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="relative pt-32 pb-28 overflow-hidden"
-        style={{ background: 'linear-gradient(135deg,#050D20 0%,#0B2D5E 50%,#071A3C 100%)' }}>
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(240,165,0,0.1)_0%,transparent_65%)]" />
-        <motion.div animate={{ scale: [1,1.2,1], opacity: [0.1,0.2,0.1] }} transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -top-24 -right-24 w-96 h-96 bg-brand-royal/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="relative pt-32 pb-28 overflow-hidden bg-[#F4F7FB]">
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(26,86,219,0.1)_0%,transparent_65%)]" />
+        <motion.div animate={{ scale: [1,1.2,1], opacity: [0.3,0.5,0.3] }} transition={{ duration: 8, repeat: Infinity }}
+          className="absolute -top-24 -right-24 w-96 h-96 bg-brand-royal/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 text-center px-6">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-black uppercase tracking-widest mb-6">
+            className="inline-block px-4 py-1.5 rounded-full bg-brand-royal/10 border border-brand-royal/30 text-brand-royal text-xs font-black uppercase tracking-widest mb-6">
             Get in Touch
           </motion.span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">
-            Talk to Our<br /><span className="text-brand-gold">Financial Experts</span>
+            className="text-5xl md:text-6xl font-extrabold text-brand-navy mb-5 leading-tight">
+            Talk to Our<br /><span className="text-brand-royal">Financial Experts</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-blue-200/70 text-xl max-w-2xl mx-auto">
+            className="text-gray-500 font-medium text-xl max-w-2xl mx-auto">
             Free consultation, zero commitment. Our experts will help you find the right loan within minutes.
           </motion.p>
         </div>
@@ -132,7 +131,7 @@ const ContactUs = () => {
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Full Name *</label>
                       <input {...register('fullName', { required: true })}
-                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all font-medium text-brand-navy"
+                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all font-medium text-brand-navy"
                         placeholder="Rajesh Sharma" />
                       {errors.fullName && <p className="text-red-500 text-xs mt-1.5">Full name is required</p>}
                     </div>
@@ -141,7 +140,7 @@ const ContactUs = () => {
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number *</label>
                       <input {...register('phone', { required: true, pattern: /^[6-9]\d{9}$/ })}
-                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all font-medium text-brand-navy"
+                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all font-medium text-brand-navy"
                         placeholder="+91 98765 43210" />
                       {errors.phone && <p className="text-red-500 text-xs mt-1.5">Valid 10-digit phone required</p>}
                     </div>
@@ -152,7 +151,7 @@ const ContactUs = () => {
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
                       <input {...register('email', { pattern: /^\S+@\S+$/i })}
-                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all font-medium text-brand-navy"
+                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all font-medium text-brand-navy"
                         placeholder="you@example.com" />
                     </div>
 
@@ -160,7 +159,7 @@ const ContactUs = () => {
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Loan Amount Needed</label>
                       <select {...register('loanAmount')}
-                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all font-medium text-brand-navy">
+                        className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all font-medium text-brand-navy">
                         <option value="">Select Amount</option>
                         <option>Up to ₹1 Lakh</option>
                         <option>₹1–5 Lakh</option>
@@ -176,7 +175,7 @@ const ContactUs = () => {
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Service Interested In *</label>
                     <select {...register('service', { required: true })}
-                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all font-medium text-brand-navy">
+                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all font-medium text-brand-navy">
                       <option value="">Select a Service</option>
                       <option>Personal Loan</option>
                       <option>Business Loan</option>
@@ -196,7 +195,7 @@ const ContactUs = () => {
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Message (Optional)</label>
                     <textarea {...register('message')} rows="4"
-                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all resize-none font-medium text-brand-navy"
+                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-gray-100 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-royal focus:border-transparent transition-all resize-none font-medium text-brand-navy"
                       placeholder="Tell us about your financial requirements, current CIBIL score, or any questions…" />
                   </div>
 
@@ -245,10 +244,9 @@ const ContactUs = () => {
             </div>
 
             {/* Why choose card */}
-            <div className="rounded-3xl p-8 text-white shadow-2xl"
-              style={{ background: 'linear-gradient(135deg,#050D20 0%,#0B2D5E 100%)' }}>
-              <div className="absolute inset-0 bg-[radial-gradient(rgba(240,165,0,0.06)_0%,transparent_70%)] rounded-3xl pointer-events-none" />
-              <h3 className="font-extrabold text-xl mb-5 text-brand-gold">Why Clients Choose Us</h3>
+            <div className="rounded-3xl p-8 text-brand-navy shadow-xl bg-white border border-gray-100">
+              <div className="absolute inset-0 bg-[radial-gradient(rgba(26,86,219,0.06)_0%,transparent_70%)] rounded-3xl pointer-events-none" />
+              <h3 className="font-extrabold text-xl mb-5 text-brand-royal">Why Clients Choose Us</h3>
               <div className="space-y-4">
                 {[
                   '🏆 Best rate guarantee across 30+ lenders',
@@ -257,12 +255,12 @@ const ContactUs = () => {
                   '📞 Dedicated advisor assigned',
                   '✅ RBI-approved NBFC partnerships',
                 ].map(item => (
-                  <div key={item} className="text-blue-100/80 text-sm font-medium">{item}</div>
+                  <div key={item} className="text-gray-600 text-sm font-medium">{item}</div>
                 ))}
               </div>
               <a href="tel:+916396426318"
-                className="mt-7 flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-extrabold text-brand-navy transition-all hover:brightness-110"
-                style={{ background: 'linear-gradient(135deg,#F0A500,#FFD700)' }}>
+                className="mt-7 flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-extrabold text-white transition-all shadow-lg hover:-translate-y-0.5"
+                style={{ background: 'linear-gradient(135deg,#1A56DB,#1d4ed8)' }}>
                 📞 Call Now — Free Consult
               </a>
             </div>

@@ -33,7 +33,7 @@ const FloatingCoins = () => (
       >
         <div
           style={{ width: c.size, height: c.size }}
-          className="rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 shadow-lg shadow-amber-400/40 flex items-center justify-center text-white font-black text-xs border-2 border-yellow-200/60"
+          className="rounded-full bg-gradient-to-br from-yellow-300 to-blue-500 shadow-lg shadow-blue-400/40 flex items-center justify-center text-brand-navy font-black text-xs border-2 border-yellow-200/60"
         >
           ₹
         </div>
@@ -60,7 +60,7 @@ const FloatingCoins = () => (
 const MOODS = {
   idle:    { emoji: '😊', msg: 'Hello! I\'m your Finance Assistant.', color: 'from-blue-500 to-indigo-600' },
   happy:   { emoji: '🎉', msg: 'Great choice! Your plan looks perfect.', color: 'from-emerald-500 to-teal-600' },
-  money:   { emoji: '💰', msg: 'You can easily manage this loan!', color: 'from-amber-500 to-yellow-600' },
+  money:   { emoji: '💰', msg: 'You can easily manage this loan!', color: 'from-blue-500 to-yellow-600' },
   think:   { emoji: '🤔', msg: 'Calculating your best plan…', color: 'from-purple-500 to-violet-600' },
   success: { emoji: '🚀', msg: 'Calculation complete! Excellent plan!', color: 'from-green-500 to-emerald-600' },
   wow:     { emoji: '✨', msg: 'Awesome! Perfect financial strategy!', color: 'from-pink-500 to-rose-600' },
@@ -122,9 +122,9 @@ const FinanceAssistant = ({ mood }) => {
           initial={{ opacity: 0, y: 10, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.9 }}
-          className="mt-4 px-4 py-2.5 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-white/50 max-w-[180px] text-center relative"
+          className="mt-4 px-4 py-2.5 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-1000 max-w-[180px] text-center relative"
         >
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/90 rotate-45 border-t border-l border-white/50" />
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/90 rotate-45 border-t border-l border-gray-1000" />
           <p className="text-brand-navy font-semibold text-xs leading-tight">{m.msg}</p>
         </motion.div>
       </AnimatePresence>
@@ -169,7 +169,7 @@ const GlassSlider = ({ value, onChange, min, max, step }) => {
       className="w-full h-2 rounded-full cursor-pointer outline-none appearance-none"
       style={{
         '--value-percent': `${pct}%`,
-        background: `linear-gradient(to right,#F0A500 ${pct}%,rgba(255,255,255,0.15) ${pct}%)`
+        background: `linear-gradient(to right,#1A56DB ${pct}%,rgba(255,255,255,0.15) ${pct}%)`
       }}
     />
   );
@@ -179,27 +179,27 @@ const GlassSlider = ({ value, onChange, min, max, step }) => {
    GLASS INPUT
 ───────────────────────────────────────────── */
 const GlassInput = ({ prefix, suffix, value, onChange, type = 'number', min, max, step }) => (
-  <div className="flex items-center bg-white/10 border border-white/20 rounded-2xl overflow-hidden focus-within:border-brand-gold/60 focus-within:ring-2 focus-within:ring-brand-gold/20 transition-all">
-    {prefix && <span className="px-3 py-3 text-brand-gold font-black text-sm border-r border-white/20 bg-white/5">{prefix}</span>}
+  <div className="flex items-center bg-white border border-gray-200 rounded-2xl overflow-hidden focus-within:border-brand-royal/60 focus-within:ring-2 focus-within:ring-brand-royal/20 transition-all shadow-sm">
+    {prefix && <span className="px-3 py-3 text-brand-royal font-black text-sm border-r border-gray-100 bg-gray-50">{prefix}</span>}
     <input
       type={type} value={value} min={min} max={max} step={step}
       onChange={e => onChange(type === 'number' ? Number(e.target.value) : e.target.value)}
-      className="flex-1 bg-transparent px-3 py-3 text-white font-bold text-sm outline-none text-right w-0"
+      className="flex-1 bg-transparent px-3 py-3 text-brand-navy font-bold text-sm outline-none text-right w-0"
     />
-    {suffix && <span className="px-3 py-3 text-gray-300 font-semibold text-sm border-l border-white/20 bg-white/5">{suffix}</span>}
+    {suffix && <span className="px-3 py-3 text-gray-500 font-semibold text-sm border-l border-gray-100 bg-gray-50">{suffix}</span>}
   </div>
 );
 
 /* ─────────────────────────────────────────────
    MAIN CALCULATOR
 ───────────────────────────────────────────── */
-const ProfitCalc = () => {
+const InterestCalc = () => {
   /* ── State ── */
   const [loanAmount,    setLoanAmount]    = useState(20000);
   const [emiType,       setEmiType]       = useState('daily');   // 'daily' | 'monthly'
-  const [profitMode,    setProfitMode]    = useState('fixed');    // 'fixed' | 'percent'
-  const [fixedProfit,   setFixedProfit]   = useState(4000);
-  const [profitPct,     setProfitPct]     = useState(20);
+  const [interestMode,    setInterestMode]    = useState('fixed');    // 'fixed' | 'percent'
+  const [fixedInterest,   setFixedInterest]   = useState(4000);
+  const [interestPct,     setInterestPct]     = useState(20);
   const [emiAmount,     setEmiAmount]     = useState(250);
   const [startDate,     setStartDate]     = useState(format(new Date(), 'yyyy-MM-dd'));
   const [tab,           setTab]           = useState('overview'); // overview | schedule | chart
@@ -207,13 +207,13 @@ const ProfitCalc = () => {
   const [showSuccess,   setShowSuccess]   = useState(false);
   const [copied,        setCopied]        = useState(false);
 
-  /* ── Profit Model Calculation ── */
+  /* ── Interest Model Calculation ── */
   const calc = useMemo(() => {
     const P      = loanAmount || 0;
-    const profit = profitMode === 'fixed'
-      ? (fixedProfit || 0)
-      : Math.round(P * (profitPct / 100));
-    const total  = P + profit;
+    const interest = interestMode === 'fixed'
+      ? (fixedInterest || 0)
+      : Math.round(P * (interestPct / 100));
+    const total  = P + interest;
     const emi    = Math.max(1, emiAmount);
 
     if (emiType === 'daily') {
@@ -222,15 +222,15 @@ const ProfitCalc = () => {
       const start       = new Date(startDate);
       const end         = addDays(start, totalDays - 1);
       const pctComplete = 0; // fresh loan
-      return { P, profit, total, emi, totalDays, totalMonths, start, end, pctComplete, mode: 'daily' };
+      return { P, interest, total, emi, totalDays, totalMonths, start, end, pctComplete, mode: 'daily' };
     } else {
       const totalMonths = Math.ceil(total / emi);
       const totalDays   = totalMonths * 30;
       const start       = new Date(startDate);
       const end         = addMonths(start, totalMonths);
-      return { P, profit, total, emi, totalDays, totalMonths, start, end, pctComplete: 0, mode: 'monthly' };
+      return { P, interest, total, emi, totalDays, totalMonths, start, end, pctComplete: 0, mode: 'monthly' };
     }
-  }, [loanAmount, profitMode, fixedProfit, profitPct, emiAmount, emiType, startDate]);
+  }, [loanAmount, interestMode, fixedInterest, interestPct, emiAmount, emiType, startDate]);
 
   /* ── Payment Schedule ── */
   const schedule = useMemo(() => {
@@ -264,17 +264,17 @@ const ProfitCalc = () => {
     }, 800);
   }, []);
 
-  useEffect(() => { triggerCalc(); }, [loanAmount, fixedProfit, profitPct, emiAmount, emiType, profitMode]);
+  useEffect(() => { triggerCalc(); }, [loanAmount, fixedInterest, interestPct, emiAmount, emiType, interestMode]);
 
   /* ── Pie Chart Data ── */
   const pieData = [
     { name: 'Principal', value: calc.P, color: '#1A56DB' },
-    { name: 'Profit',    value: calc.profit, color: '#F0A500' },
+    { name: 'Interest Amount',    value: calc.interest, color: '#1A56DB' },
   ];
 
   /* ── Copy Summary ── */
   const copySummary = () => {
-    const txt = `United Finserves – Loan Summary\nLoan: ₹${calc.P.toLocaleString('en-IN')}\nProfit: ₹${calc.profit.toLocaleString('en-IN')}\nTotal: ₹${calc.total.toLocaleString('en-IN')}\nEMI: ₹${calc.emi.toLocaleString('en-IN')} (${emiType})\nDuration: ${calc.totalDays} days / ${calc.totalMonths} months\nStart: ${format(calc.start, 'dd MMM yyyy')}\nEnd: ${format(calc.end, 'dd MMM yyyy')}`;
+    const txt = `United Finserves – Loan Summary\nLoan: ₹${calc.P.toLocaleString('en-IN')}\nInterest Amount: ₹${calc.interest.toLocaleString('en-IN')}\nTotal: ₹${calc.total.toLocaleString('en-IN')}\nEMI: ₹${calc.emi.toLocaleString('en-IN')} (${emiType})\nDuration: ${calc.totalDays} days / ${calc.totalMonths} months\nStart: ${format(calc.start, 'dd MMM yyyy')}\nEnd: ${format(calc.end, 'dd MMM yyyy')}`;
     navigator.clipboard.writeText(txt).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
   };
 
@@ -282,13 +282,13 @@ const ProfitCalc = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #050D20 0%, #0B2D5E 40%, #071A3C 70%, #0A1628 100%)'
+      background: 'linear-gradient(135deg, #F4F7FB 0%, #FFFFFF 100%)'
     }}>
       <FloatingCoins />
 
       {/* Radial glow bg */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-brand-royal/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -top-32 right-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-[500px] h-[500px] bg-brand-royal/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Success Flash */}
       <AnimatePresence>
@@ -314,15 +314,15 @@ const ProfitCalc = () => {
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-gold to-amber-400 mb-5 shadow-2xl shadow-brand-gold/30"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-royal to-blue-400 mb-5 shadow-2xl shadow-brand-royal/30"
           >
             <GiTwoCoins className="text-white text-3xl" />
           </motion.div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-3 leading-tight">
-            Virtual Finance <span className="text-brand-gold">Calculator</span>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-brand-navy mb-3 leading-tight">
+            Virtual Finance <span className="text-brand-royal">Calculator</span>
           </h1>
           <p className="text-blue-200/70 text-lg max-w-xl mx-auto">
-            Profit-based loan planner — daily & monthly EMI with live payment schedule
+            Interest Amount-based loan planner — daily & monthly EMI with live payment schedule
           </p>
         </motion.div>
 
@@ -331,65 +331,64 @@ const ProfitCalc = () => {
 
           {/* ── LEFT: Input Panel ── */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
-            className="rounded-3xl border border-white/10 p-7 md:p-9 shadow-2xl space-y-7"
-            style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)' }}
+            className="rounded-3xl border border-gray-200 bg-white p-7 md:p-9 shadow-xl space-y-7"
           >
-            <h2 className="text-white font-extrabold text-xl flex items-center gap-2">
-              <FaCoins className="text-brand-gold" /> Loan Parameters
+            <h2 className="text-brand-navy font-extrabold text-xl flex items-center gap-2">
+              <FaCoins className="text-brand-royal" /> Loan Parameters
             </h2>
 
             {/* Loan Amount */}
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <label className="text-blue-200 text-sm font-semibold flex items-center gap-1.5">
-                  <FaRupeeSign className="text-brand-gold text-xs" /> Loan Amount
+                <label className="text-gray-500 text-sm font-semibold flex items-center gap-1.5">
+                  <FaRupeeSign className="text-brand-royal text-xs" /> Loan Amount
                 </label>
-                <span className="text-brand-gold font-black text-base">₹{loanAmount.toLocaleString('en-IN')}</span>
+                <span className="text-brand-royal font-black text-base">₹{loanAmount.toLocaleString('en-IN')}</span>
               </div>
               <GlassSlider value={loanAmount} onChange={setLoanAmount} min={500} max={1000000} step={500} />
-              <div className="flex justify-between text-xs text-blue-300/60">
+              <div className="flex justify-between text-xs text-gray-400">
                 <span>₹500</span><span>₹10,00,000</span>
               </div>
               <GlassInput prefix="₹" value={loanAmount} onChange={setLoanAmount} min={500} max={1000000} step={500} />
             </div>
 
-            {/* Profit Model */}
+            {/* Interest Model */}
             <div className="space-y-3">
-              <label className="text-blue-200 text-sm font-semibold block flex items-center gap-1.5">
-                <FaPercent className="text-brand-gold text-xs" /> Profit Model
+              <label className="text-gray-500 text-sm font-semibold block flex items-center gap-1.5">
+                <FaPercent className="text-brand-royal text-xs" /> Interest Model
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {[['fixed','Fixed Amount'],['percent','Percentage']].map(([v,l]) => (
-                  <button key={v} onClick={() => setProfitMode(v)}
+                  <button key={v} onClick={() => setInterestMode(v)}
                     className={`py-3 rounded-2xl text-sm font-bold border-2 transition-all duration-200 ${
-                      profitMode === v ? 'bg-brand-gold text-white border-brand-gold shadow-lg shadow-brand-gold/30'
-                        : 'border-white/20 text-blue-200 hover:border-brand-gold/50 bg-white/5'}`}>
+                      interestMode === v ? 'bg-brand-royal text-white border-brand-royal shadow-lg shadow-brand-royal/30'
+                        : 'border-gray-200 text-gray-500 hover:border-brand-royal/50 bg-gray-50'}`}>
                     {l}
                   </button>
                 ))}
               </div>
 
               <AnimatePresence mode="wait">
-                {profitMode === 'fixed' ? (
+                {interestMode === 'fixed' ? (
                   <motion.div key="fixed" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                    <div className="flex justify-between text-xs text-blue-300/70 mb-2">
-                      <span>Fixed Profit Amount</span>
-                      <span className="text-brand-gold font-bold">₹{fixedProfit.toLocaleString('en-IN')}</span>
+                    <div className="flex justify-between text-xs text-gray-500 mb-2">
+                      <span>Fixed Interest Amount Amount</span>
+                      <span className="text-brand-royal font-bold">₹{fixedInterest.toLocaleString('en-IN')}</span>
                     </div>
-                    <GlassSlider value={fixedProfit} onChange={setFixedProfit} min={0} max={200000} step={100} />
+                    <GlassSlider value={fixedInterest} onChange={setFixedInterest} min={0} max={200000} step={100} />
                     <div className="mt-2">
-                      <GlassInput prefix="₹" value={fixedProfit} onChange={setFixedProfit} min={0} max={200000} step={100} />
+                      <GlassInput prefix="₹" value={fixedInterest} onChange={setFixedInterest} min={0} max={200000} step={100} />
                     </div>
                   </motion.div>
                 ) : (
                   <motion.div key="pct" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                    <div className="flex justify-between text-xs text-blue-300/70 mb-2">
-                      <span>Profit Percentage</span>
-                      <span className="text-brand-gold font-bold">{profitPct}%</span>
+                    <div className="flex justify-between text-xs text-gray-500 mb-2">
+                      <span>Interest Amount Percentage</span>
+                      <span className="text-brand-royal font-bold">{interestPct}%</span>
                     </div>
-                    <GlassSlider value={profitPct} onChange={setProfitPct} min={0} max={100} step={0.5} />
+                    <GlassSlider value={interestPct} onChange={setInterestPct} min={0} max={100} step={0.5} />
                     <div className="mt-2">
-                      <GlassInput suffix="%" value={profitPct} onChange={setProfitPct} min={0} max={100} step={0.5} />
+                      <GlassInput suffix="%" value={interestPct} onChange={setInterestPct} min={0} max={100} step={0.5} />
                     </div>
                   </motion.div>
                 )}
@@ -398,13 +397,13 @@ const ProfitCalc = () => {
 
             {/* EMI Type */}
             <div className="space-y-3">
-              <label className="text-blue-200 text-sm font-semibold block">EMI Frequency</label>
+              <label className="text-gray-500 text-sm font-semibold block">EMI Frequency</label>
               <div className="grid grid-cols-2 gap-3">
                 {[['daily','📅 Daily'],['monthly','🗓️ Monthly']].map(([v,l]) => (
                   <button key={v} onClick={() => setEmiType(v)}
                     className={`py-3.5 rounded-2xl text-sm font-bold border-2 transition-all duration-200 ${
                       emiType === v ? 'bg-brand-royal text-white border-brand-royal shadow-lg shadow-brand-royal/30'
-                        : 'border-white/20 text-blue-200 hover:border-brand-royal/50 bg-white/5'}`}>
+                        : 'border-gray-200 text-gray-500 hover:border-brand-royal/50 bg-gray-50'}`}>
                     {l}
                   </button>
                 ))}
@@ -414,10 +413,10 @@ const ProfitCalc = () => {
             {/* EMI Amount */}
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <label className="text-blue-200 text-sm font-semibold flex items-center gap-1.5">
-                  <FaRupeeSign className="text-brand-gold text-xs" /> {emiType === 'daily' ? 'Daily' : 'Monthly'} EMI Amount
+                <label className="text-gray-500 text-sm font-semibold flex items-center gap-1.5">
+                  <FaRupeeSign className="text-brand-royal text-xs" /> {emiType === 'daily' ? 'Daily' : 'Monthly'} EMI Amount
                 </label>
-                <span className="text-white/60 text-xs">Editable</span>
+                <span className="text-gray-400 text-xs">Editable</span>
               </div>
               <GlassSlider value={emiAmount} onChange={setEmiAmount} min={100} max={50000} step={50} />
               <GlassInput prefix="₹" value={emiAmount} onChange={setEmiAmount} min={100} max={50000} step={50} />
@@ -425,10 +424,10 @@ const ProfitCalc = () => {
 
             {/* Start Date */}
             <div className="space-y-2">
-              <label className="text-blue-200 text-sm font-semibold flex items-center gap-1.5">
-                <FaCalendarAlt className="text-brand-gold text-xs" /> Loan Start Date
+              <label className="text-gray-500 text-sm font-semibold flex items-center gap-1.5">
+                <FaCalendarAlt className="text-brand-royal text-xs" /> Loan Start Date
               </label>
-              <GlassInput type="text" value={startDate} onChange={setStartDate} />
+              <GlassInput type="date" value={startDate} onChange={setStartDate} />
             </div>
           </motion.div>
 
@@ -441,16 +440,16 @@ const ProfitCalc = () => {
             <div className="w-full space-y-3">
               {[
                 { label: 'Principal', val: calc.P, icon: '🏦', color: 'from-blue-600 to-blue-800' },
-                { label: 'Profit',    val: calc.profit, icon: '📈', color: 'from-amber-500 to-amber-700' },
+                { label: 'Interest Amount',    val: calc.interest, icon: '📈', color: 'from-blue-500 to-blue-700' },
                 { label: 'Total',     val: calc.total, icon: '💰', color: 'from-emerald-600 to-emerald-800' },
               ].map(({ label, val, icon, color }) => (
                 <motion.div key={label} layout
                   className={`flex items-center justify-between px-5 py-3.5 rounded-2xl bg-gradient-to-r ${color} shadow-lg`}>
                   <div className="flex items-center gap-3">
                     <span className="text-xl">{icon}</span>
-                    <span className="text-white/80 text-sm font-semibold">{label}</span>
+                    <span className="text-brand-navy/80 text-sm font-semibold">{label}</span>
                   </div>
-                  <AnimNum value={val} className="text-white font-extrabold text-base" />
+                  <AnimNum value={val} className="text-brand-navy font-extrabold text-base" />
                 </motion.div>
               ))}
             </div>
@@ -459,20 +458,20 @@ const ProfitCalc = () => {
             <div className="relative w-32 h-32">
               <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
                 <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" />
-                <motion.circle cx="60" cy="60" r="50" fill="none" stroke="#F0A500" strokeWidth="12"
+                <motion.circle cx="60" cy="60" r="50" fill="none" stroke="#1A56DB" strokeWidth="12"
                   strokeLinecap="round"
                   strokeDasharray={`${2 * Math.PI * 50}`}
-                  key={calc.profit}
+                  key={calc.interest}
                   initial={{ strokeDashoffset: 2 * Math.PI * 50 }}
-                  animate={{ strokeDashoffset: 2 * Math.PI * 50 * (1 - (calc.profit / calc.total)) }}
+                  animate={{ strokeDashoffset: 2 * Math.PI * 50 * (1 - (calc.interest / calc.total)) }}
                   transition={{ duration: 1.5, ease: 'easeOut' }}
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-brand-gold font-black text-xl">
-                  {Math.round((calc.profit / calc.total) * 100) || 0}%
+                <span className="text-brand-royal font-black text-xl">
+                  {Math.round((calc.interest / calc.total) * 100) || 0}%
                 </span>
-                <span className="text-blue-300 text-[10px] uppercase tracking-wide">Profit</span>
+                <span className="text-blue-300 text-[10px] uppercase tracking-wide">Interest Amount</span>
               </div>
             </div>
           </motion.div>
@@ -482,38 +481,37 @@ const ProfitCalc = () => {
             className="space-y-6">
 
             {/* Summary Card */}
-            <div className="rounded-3xl border border-white/10 p-7 shadow-2xl"
-              style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)' }}>
-              <h2 className="text-white font-extrabold text-xl mb-6 flex items-center gap-2">
-                <FaChartPie className="text-brand-gold" /> Live Preview
+            <div className="rounded-3xl border border-gray-200 bg-white p-7 shadow-xl">
+              <h2 className="text-brand-navy font-extrabold text-xl mb-6 flex items-center gap-2">
+                <FaChartPie className="text-brand-royal" /> Live Preview
               </h2>
               <div className="space-y-4">
                 {[
-                  { label: 'Loan Amount',    val: calc.P,      color: 'text-blue-300' },
-                  { label: 'Profit',         val: calc.profit, color: 'text-brand-gold' },
-                  { label: 'Total Collection',val: calc.total,  color: 'text-emerald-400', bold: true },
-                  { label: `${emiType === 'daily' ? 'Daily' : 'Monthly'} EMI`, val: calc.emi, color: 'text-white' },
+                  { label: 'Loan Amount',    val: calc.P,      color: 'text-brand-navy' },
+                  { label: 'Interest Amount',         val: calc.interest, color: 'text-brand-royal' },
+                  { label: 'Total Collection',val: calc.total,  color: 'text-emerald-500', bold: true },
+                  { label: `${emiType === 'daily' ? 'Daily' : 'Monthly'} EMI`, val: calc.emi, color: 'text-brand-navy' },
                 ].map(({ label, val, color, bold }) => (
-                  <div key={label} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0">
-                    <span className="text-blue-200/70 text-sm">{label}</span>
+                  <div key={label} className="flex justify-between items-center border-b border-gray-100 pb-3 last:border-0">
+                    <span className="text-gray-500 text-sm">{label}</span>
                     <AnimNum value={val} className={`${color} ${bold ? 'font-extrabold text-lg' : 'font-bold'}`} />
                   </div>
                 ))}
-                <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                  <span className="text-blue-200/70 text-sm">Total Days</span>
-                  <span className="text-white font-bold">{calc.totalDays} days</span>
+                <div className="flex justify-between items-center border-b border-gray-100 pb-3">
+                  <span className="text-gray-500 text-sm">Total Days</span>
+                  <span className="text-brand-navy font-bold">{calc.totalDays} days</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                  <span className="text-blue-200/70 text-sm">Total Months</span>
-                  <span className="text-white font-bold">{calc.totalMonths} months</span>
+                <div className="flex justify-between items-center border-b border-gray-100 pb-3">
+                  <span className="text-gray-500 text-sm">Total Months</span>
+                  <span className="text-brand-navy font-bold">{calc.totalMonths} months</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                  <span className="text-blue-200/70 text-sm">Start Date</span>
-                  <span className="text-white font-bold">{format(calc.start, 'dd MMM yyyy')}</span>
+                <div className="flex justify-between items-center border-b border-gray-100 pb-3">
+                  <span className="text-gray-500 text-sm">Start Date</span>
+                  <span className="text-brand-navy font-bold">{format(calc.start, 'dd MMM yyyy')}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-blue-200/70 text-sm">End Date</span>
-                  <span className="text-brand-gold font-bold">{format(calc.end, 'dd MMM yyyy')}</span>
+                  <span className="text-gray-500 text-sm">End Date</span>
+                  <span className="text-brand-royal font-bold">{format(calc.end, 'dd MMM yyyy')}</span>
                 </div>
               </div>
             </div>
@@ -533,8 +531,8 @@ const ProfitCalc = () => {
 
             {/* Apply CTA */}
             <motion.a href="/contact" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-              className="block text-center py-4 rounded-2xl font-extrabold text-white text-lg shadow-2xl shadow-brand-gold/30"
-              style={{ background: 'linear-gradient(135deg, #F0A500 0%, #e07b00 100%)' }}>
+              className="block text-center py-4 rounded-2xl font-extrabold text-white text-lg shadow-2xl shadow-brand-royal/30"
+              style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #1d4ed8 100%)' }}>
               🚀 Apply for This Loan
             </motion.a>
           </motion.div>
@@ -542,18 +540,18 @@ const ProfitCalc = () => {
 
         {/* ── TABS: Schedule + Charts ── */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-          className="mt-12 rounded-3xl border border-white/10 overflow-hidden shadow-2xl"
+          className="mt-12 rounded-3xl border border-gray-200 overflow-hidden shadow-2xl"
           style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(20px)' }}>
 
           {/* Tab Bar */}
-          <div className="flex border-b border-white/10">
+          <div className="flex border-b border-gray-200">
             {[
               { id: 'schedule', label: '📅 Payment Schedule' },
               { id: 'chart',    label: '📊 Charts' },
             ].map(t => (
               <button key={t.id} onClick={() => setTab(t.id)}
                 className={`flex-1 py-4 font-bold text-sm transition-all ${
-                  tab === t.id ? 'text-brand-gold border-b-2 border-brand-gold bg-white/5' : 'text-blue-300/60 hover:text-white'}`}>
+                  tab === t.id ? 'text-brand-royal border-b-2 border-brand-royal bg-white' : 'text-gray-500 hover:text-brand-navy'}`}>
                 {t.label}
               </button>
             ))}
@@ -565,37 +563,37 @@ const ProfitCalc = () => {
               {tab === 'schedule' && (
                 <motion.div key="schedule" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-white font-extrabold text-lg">
+                    <h3 className="text-brand-navy font-extrabold text-lg">
                       {emiType === 'daily' ? 'Daily' : 'Monthly'} Collection Schedule
-                      <span className="ml-2 text-blue-300/60 text-sm font-normal">(First 60 entries)</span>
+                      <span className="ml-2 text-gray-500 text-sm font-normal">(First 60 entries)</span>
                     </h3>
-                    <span className="text-brand-gold text-sm font-bold">{schedule.length} {emiType === 'daily' ? 'days' : 'months'}</span>
+                    <span className="text-brand-royal text-sm font-bold">{schedule.length} {emiType === 'daily' ? 'days' : 'months'}</span>
                   </div>
                   <div className="overflow-auto max-h-[420px] rounded-2xl">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="text-blue-200/60 text-xs uppercase tracking-wider">
-                          <th className="py-3 px-4 text-left sticky top-0 bg-[#0B2D5E]">#</th>
-                          <th className="py-3 px-4 text-left sticky top-0 bg-[#0B2D5E]">Date</th>
-                          <th className="py-3 px-4 text-right sticky top-0 bg-[#0B2D5E]">EMI</th>
-                          <th className="py-3 px-4 text-right sticky top-0 bg-[#0B2D5E]">Outstanding</th>
-                          <th className="py-3 px-4 text-center sticky top-0 bg-[#0B2D5E]">Status</th>
+                        <tr className="text-gray-500 text-xs uppercase tracking-wider">
+                          <th className="py-3 px-4 text-left sticky top-0 bg-gray-100">#</th>
+                          <th className="py-3 px-4 text-left sticky top-0 bg-gray-100">Date</th>
+                          <th className="py-3 px-4 text-right sticky top-0 bg-gray-100">EMI</th>
+                          <th className="py-3 px-4 text-right sticky top-0 bg-gray-100">Outstanding</th>
+                          <th className="py-3 px-4 text-center sticky top-0 bg-gray-100">Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         {schedule.map((row, i) => (
                           <motion.tr key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: Math.min(i * 0.02, 0.5) }}
-                            className="border-t border-white/5 hover:bg-white/5 transition-colors">
-                            <td className="py-3 px-4 text-blue-300/60 font-mono text-xs">{row.num}</td>
-                            <td className="py-3 px-4 text-white font-medium">{row.date}</td>
-                            <td className="py-3 px-4 text-right text-brand-gold font-bold">₹{row.amount.toLocaleString('en-IN')}</td>
+                            className="border-t border-gray-100 hover:bg-white transition-colors">
+                            <td className="py-3 px-4 text-gray-500 font-mono text-xs">{row.num}</td>
+                            <td className="py-3 px-4 text-brand-navy font-medium">{row.date}</td>
+                            <td className="py-3 px-4 text-right text-brand-royal font-bold">₹{row.amount.toLocaleString('en-IN')}</td>
                             <td className="py-3 px-4 text-right text-blue-200/70">₹{row.outstanding.toLocaleString('en-IN')}</td>
                             <td className="py-3 px-4 text-center">
                               <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                                 row.status === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' :
-                                row.status === 'Due'  ? 'bg-brand-gold/20 text-brand-gold' :
-                                'bg-blue-500/10 text-blue-300/60'}`}>
+                                row.status === 'Due'  ? 'bg-brand-royal/20 text-brand-royal' :
+                                'bg-blue-500/10 text-gray-500'}`}>
                                 {row.status}
                               </span>
                             </td>
@@ -614,7 +612,7 @@ const ProfitCalc = () => {
 
                   {/* Pie Chart */}
                   <div>
-                    <h3 className="text-white font-bold mb-4 text-center">Principal vs Profit</h3>
+                    <h3 className="text-brand-navy font-bold mb-4 text-center">Principal vs Interest Amount</h3>
                     <ResponsiveContainer width="100%" height={260}>
                       <PieChart>
                         <Pie data={pieData} cx="50%" cy="50%" innerRadius={70} outerRadius={110}
@@ -624,7 +622,7 @@ const ProfitCalc = () => {
                           ))}
                         </Pie>
                         <RTooltip formatter={(v) => `₹${Number(v).toLocaleString('en-IN')}`}
-                          contentStyle={{ background: '#0B2D5E', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, color: '#fff' }} />
+                          contentStyle={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, color: '#000' }} />
                       </PieChart>
                     </ResponsiveContainer>
                     <div className="flex justify-center gap-6 mt-2">
@@ -639,23 +637,23 @@ const ProfitCalc = () => {
 
                   {/* Bar Chart — first 12 collections */}
                   <div>
-                    <h3 className="text-white font-bold mb-4 text-center">
+                    <h3 className="text-brand-navy font-bold mb-4 text-center">
                       Collection Progress {emiType === 'daily' ? '(Days 1–12)' : '(Months 1–12)'}
                     </h3>
                     <ResponsiveContainer width="100%" height={260}>
                       <BarChart data={schedule.slice(0, 12).map(r => ({ name: r.num, amount: r.amount, outstanding: r.outstanding }))}>
-                        <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 11 }} />
-                        <YAxis stroke="rgba(255,255,255,0.3)" tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 10 }}
+                        <XAxis dataKey="name" stroke="#9ca3af" tick={{ fill: '#6b7280', fontSize: 11 }} />
+                        <YAxis stroke="#9ca3af" tick={{ fill: '#6b7280', fontSize: 10 }}
                           tickFormatter={v => `₹${(v/1000).toFixed(0)}k`} />
                         <RTooltip formatter={(v) => `₹${Number(v).toLocaleString('en-IN')}`}
-                          contentStyle={{ background: '#0B2D5E', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, color: '#fff' }} />
-                        <Bar dataKey="amount" fill="#F0A500" radius={[6,6,0,0]} />
-                        <Bar dataKey="outstanding" fill="#1A56DB" radius={[6,6,0,0]} opacity={0.6} />
+                          contentStyle={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, color: '#000' }} />
+                        <Bar dataKey="amount" fill="#1A56DB" radius={[6,6,0,0]} />
+                        <Bar dataKey="outstanding" fill="#60A5FA" radius={[6,6,0,0]} opacity={0.6} />
                       </BarChart>
                     </ResponsiveContainer>
                     <div className="flex justify-center gap-6 mt-2">
-                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-brand-gold" /><span className="text-blue-200/70 text-xs">EMI Collected</span></div>
-                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-brand-royal" /><span className="text-blue-200/70 text-xs">Outstanding</span></div>
+                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-[#1A56DB]" /><span className="text-gray-500 text-xs">EMI Collected</span></div>
+                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-[#60A5FA]" /><span className="text-gray-500 text-xs">Outstanding</span></div>
                     </div>
                   </div>
                 </motion.div>
@@ -669,4 +667,4 @@ const ProfitCalc = () => {
   );
 };
 
-export default ProfitCalc;
+export default InterestCalc;

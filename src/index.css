@@ -3,12 +3,12 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   
-  /* Logo-matched colors:
-     Logo has: deep navy blue hand, gold/amber coins, green currency */
-  --color-brand-navy:   #0B2D5E;   /* deep navy from logo hand */
+  /* Blue-focused professional palette */
+  --color-brand-navy:   #0B2D5E;   /* deep navy */
   --color-brand-royal:  #1A56DB;   /* bright blue accent */
-  --color-brand-gold:   #F0A500;   /* warm gold from coins */
-  --color-brand-green:  #22C55E;   /* logo currency green */
+  --color-brand-blue:   #2563EB;   /* primary blue CTA */
+  --color-brand-sky:    #EFF6FF;   /* lightest blue tint */
+  --color-brand-green:  #22C55E;   /* success green */
   --color-brand-light:  #F4F7FB;   /* light background */
   --color-brand-gray:   #64748b;
   --color-brand-dark:   #071A3C;   /* darkest navy */
@@ -16,26 +16,29 @@
 
 @layer base {
   body {
-    @apply bg-brand-light text-brand-dark font-sans antialiased overflow-x-hidden;
+    @apply bg-white text-brand-navy font-sans antialiased overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    @apply font-bold text-brand-navy;
   }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg;
+  .glass-light {
+    @apply bg-white/80 backdrop-blur-md border border-blue-100 shadow-lg;
   }
-  .glass-dark {
-    @apply bg-brand-navy/90 backdrop-blur-lg border border-white/10 shadow-xl;
+  .glass-blue {
+    @apply bg-brand-royal/90 backdrop-blur-lg border border-white/10 shadow-xl;
   }
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-royal to-brand-gold;
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-royal to-brand-blue;
   }
-  .bg-gradient-premium {
-    @apply bg-gradient-to-br from-brand-navy via-[#0f3b7c] to-brand-dark;
+  .btn-primary {
+    @apply px-8 py-4 rounded-2xl font-extrabold text-white bg-brand-royal hover:bg-brand-blue shadow-lg shadow-brand-royal/20 hover:-translate-y-0.5 transition-all duration-300;
+  }
+  .btn-outline {
+    @apply px-8 py-4 rounded-2xl font-bold text-brand-navy border-2 border-gray-200 hover:border-brand-royal hover:text-brand-royal transition-all duration-300;
   }
 }
 
@@ -43,9 +46,9 @@
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb { background: #1A56DB; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #F0A500; }
+::-webkit-scrollbar-thumb:hover { background: #0B2D5E; }
 
-/* Range slider styling */
+/* Range slider styling — blue theme */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -56,23 +59,23 @@ input[type="range"]::-webkit-slider-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #0B2D5E;
-  border: 3px solid #F0A500;
+  background: #1A56DB;
+  border: 3px solid white;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(11, 45, 94, 0.4);
+  box-shadow: 0 2px 8px rgba(26, 86, 219, 0.4);
   transition: box-shadow 0.2s;
 }
 input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 6px rgba(240, 165, 0, 0.15);
+  box-shadow: 0 0 0 6px rgba(26, 86, 219, 0.15);
 }
 input[type="range"]::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 3px;
   background: linear-gradient(
     to right,
-    #F0A500 0%,
-    #F0A500 var(--value-percent, 0%),
-    rgba(255, 255, 255, 0.15) var(--value-percent, 0%),
-    rgba(255, 255, 255, 0.15) 100%
+    #1A56DB 0%,
+    #1A56DB var(--value-percent, 0%),
+    #BFDBFE var(--value-percent, 0%),
+    #BFDBFE 100%
   );
 }

@@ -6,7 +6,7 @@ import AppLayout from './layouts/AppLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import ProfitCalc from './pages/ProfitCalc';
+import InterestCalc from './pages/InterestCalc';
 import ContactUs from './pages/ContactUs';
 import AdminLayout from './layouts/AdminLayout';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -24,7 +24,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<Services />} />
-        <Route path="profit-calculator" element={<ProfitCalc />} />
+        <Route path="interest-calculator" element={<InterestCalc />} />
         <Route path="contact" element={<ContactUs />} />
         <Route path="apply" element={<div className="pt-32 min-h-screen text-center"><h1 className="text-4xl">Apply Now</h1></div>} />
       </Route>

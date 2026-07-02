@@ -1,55 +1,57 @@
-import React from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import AnimatedNumber from '../AnimatedNumber';
-import { FaUsers, FaBuilding, FaHandshake, FaClock } from 'react-icons/fa';
+
+const AnimNum = ({ value }) => {
+  const [display, setDisplay] = useState(0);
+  const prev = useRef(0);
+  useEffect(() => {
+    const target = Number(value) || 0;
+    const start = prev.current;
+    const diff = target - start;
+    const steps = 40;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      setDisplay(Math.round(start + (diff * step / steps)));
+      if (step >= steps) { clearInterval(timer); prev.current = target; }
+    }, 18);
+    return () => clearInterval(timer);
+  }, [value]);
+  return <>{display.toLocaleString('en-IN')}</>;
+};
 
 const stats = [
-  { id: 1, name: 'Happy Clients',       value: 5000,  suffix: '+',    prefix: '',  icon: FaUsers,     color: 'text-blue-400' },
-  { id: 2, name: 'Loans Disbursed',     value: 100,   suffix: 'Cr+',  prefix: '₹', icon: FaBuilding,  color: 'text-brand-gold' },
-  { id: 3, name: 'Bank Partners',       value: 30,    suffix: '+',    prefix: '',  icon: FaHandshake, color: 'text-emerald-400' },
-  { id: 4, name: 'Avg. Turnaround',     value: 24,    suffix: ' Hrs', prefix: '',  icon: FaClock,     color: 'text-purple-400' },
+  { val: 5000, suffix: '+', label: 'Happy Customers' },
+  { prefix: '₹', val: 100, suffix: 'Cr+', label: 'Loan Disbursed' },
+  { val: 30, suffix: '+', label: 'Bank Partners' },
+  { val: 24, suffix: ' Hrs', label: 'Average Approval Time' },
 ];
 
-const StatsSection = () => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-  return (
-    <div className="relative bg-brand-navy border-y border-white/5 py-16 overflow-hidden" ref={ref}>
-      {/* Glowing center light */}
-      <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <div className="w-[900px] h-[120px] bg-brand-royal/15 blur-[80px] rounded-full" />
-      </div>
-      {/* Top highlight line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-royal/40 to-transparent" />
-
-      <div className="w-full max-w-[1500px] mx-auto px-6 lg:px-16 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div key={stat.id}
-                initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
-                className="relative flex flex-col items-center text-center px-6 py-8 rounded-2xl bg-white/3 hover:bg-white/6 transition-colors border border-white/5 group">
-
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className={`text-xl ${stat.color}`} />
-                </div>
-
-                <div className={`text-4xl md:text-5xl font-extrabold mb-2 ${stat.color}`}>
-                  {stat.prefix}
-                  {inView ? <AnimatedNumber value={stat.value} /> : '0'}
-                  <span>{stat.suffix}</span>
-                </div>
-                <div className="text-gray-400 text-sm font-semibold uppercase tracking-widest">{stat.name}</div>
-              </motion.div>
-            );
-          })}
-        </div>
+const StatsSection = () => (
+  <section className="py-20 bg-white border-b border-gray-100">
+    <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-16">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 divide-x divide-gray-100">
+        {stats.map((s, i) => (
+          <motion.div key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.6 }}
+            className="text-center px-4"
+          >
+            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-brand-navy mb-2 flex justify-center items-baseline tracking-tight">
+              {s.prefix && <span className="text-3xl md:text-4xl text-brand-royal mr-1">{s.prefix}</span>}
+              <AnimNum value={s.val} />
+              {s.suffix && <span className="text-3xl md:text-4xl text-brand-royal ml-1">{s.suffix}</span>}
+            </div>
+            <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">
+              {s.label}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default StatsSection;

@@ -18,7 +18,7 @@ const AdminLogin = () => {
       {/* Background shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-royal rounded-full mix-blend-multiply filter blur-[128px] opacity-40"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-brand-gold rounded-full mix-blend-multiply filter blur-[128px] opacity-20"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-brand-royal rounded-full mix-blend-multiply filter blur-[128px] opacity-20"></div>
       </div>
 
       <motion.div 

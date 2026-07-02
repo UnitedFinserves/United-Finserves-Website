@@ -1,167 +1,160 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { GiTwoCoins } from 'react-icons/gi';
+import { FaCalculator, FaRupeeSign, FaPercent, FaCalendarAlt } from 'react-icons/fa';
 
-/* Quick mini animated counter */
-const MiniCount = ({ end, prefix = '', suffix = '' }) => {
-  const [val, setVal] = useState(0);
-  const started = useRef(false);
+const AnimNum = ({ value }) => {
+  const [display, setDisplay] = useState(0);
+  const prev = useRef(0);
   useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-    let n = 0;
-    const step = Math.ceil(end / 50);
-    const t = setInterval(() => {
-      n = Math.min(n + step, end);
-      setVal(n);
-      if (n >= end) clearInterval(t);
-    }, 30);
-    return () => clearInterval(t);
-  }, [end]);
-  return <span>{prefix}{val.toLocaleString('en-IN')}{suffix}</span>;
+    const target = Number(value) || 0;
+    const start = prev.current;
+    const diff = target - start;
+    const steps = 40;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      setDisplay(Math.round(start + (diff * step / steps)));
+      if (step >= steps) { clearInterval(timer); prev.current = target; }
+    }, 18);
+    return () => clearInterval(timer);
+  }, [value]);
+  return <>{display.toLocaleString('en-IN')}</>;
 };
 
-const COINS = [
-  { x: 10, y: 15, size: 40, delay: 0,   dur: 5.5 },
-  { x: 82, y: 25, size: 28, delay: 1.2, dur: 4.8 },
-  { x: 25, y: 72, size: 22, delay: 0.6, dur: 6.2 },
-  { x: 70, y: 68, size: 32, delay: 1.8, dur: 5.0 },
-  { x: 90, y: 45, size: 20, delay: 0.3, dur: 7.0 },
-];
+const EmiCalcPreview = () => {
+  const [amount, setAmount] = useState(500000);
+  const [rate, setRate] = useState(10.5);
+  const [years, setYears] = useState(5);
 
-const FinancePlannerCTA = () => {
-  const [loanAmt] = useState(20000);
-  const profit = 4000;
-  const total  = loanAmt + profit;
-  const daily  = 250;
-  const days   = Math.ceil(total / daily);
+  const calculateEMI = () => {
+    const p = amount;
+    const r = rate / 12 / 100;
+    const n = years * 12;
+    if (r === 0) return { emi: p / n, totalInterest: 0, totalPayment: p };
+    const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    const totalPayment = emi * n;
+    return {
+      emi: emi || 0,
+      totalInterest: (totalPayment - p) || 0,
+      totalPayment: totalPayment || 0
+    };
+  };
+
+  const res = calculateEMI();
 
   return (
-    <section className="relative py-28 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #050D20 0%, #0B2D5E 50%, #071A3C 100%)' }}>
+    <section className="py-24 bg-[#F4F7FB] relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-royal/5 rounded-full blur-[100px] pointer-events-none" />
+      
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-16 relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 bg-brand-navy/5 border border-brand-navy/10 rounded-full text-brand-royal font-black uppercase tracking-widest text-xs mb-5">
+            Plan Ahead
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-4">
+            Loan Interest <span className="text-brand-royal">Calculator</span>
+          </h2>
+          <p className="text-gray-500 max-w-xl mx-auto text-lg">Calculate your EMI and total interest amount instantly.</p>
+        </div>
 
-      {/* Floating coins */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {COINS.map((c, i) => (
-          <motion.div key={i} className="absolute"
-            style={{ left: `${c.x}%`, top: `${c.y}%` }}
-            animate={{ y: [0, -20, 0], rotate: [0, 360], opacity: [0.25, 0.6, 0.25] }}
-            transition={{ duration: c.dur, repeat: Infinity, delay: c.delay, ease: 'easeInOut' }}>
-            <div style={{ width: c.size, height: c.size }}
-              className="rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 shadow-lg shadow-amber-400/40 flex items-center justify-center text-white font-black text-xs border-2 border-yellow-200/60">
-              ₹
-            </div>
-          </motion.div>
-        ))}
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-royal/10 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-6 lg:px-16">
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* ─── Left: CTA copy ─── */}
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8 }}>
-
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-black uppercase tracking-widest mb-7">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
-              Virtual Finance Planner
-            </span>
-
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-              Plan Your Loan <br />
-              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg,#F0A500,#FFD700)' }}>
-                Like a Pro
-              </span>
-            </h2>
-
-            <p className="text-blue-200/70 text-lg mb-10 leading-relaxed max-w-md">
-              Our profit-based finance planner gives you a complete picture — daily or monthly EMI, total collection, payment schedule, and much more. No hidden math, no surprises.
-            </p>
-
-            <div className="space-y-4 mb-10">
-              {[
-                '✅ Profit-based calculation (not bank EMI)',
-                '✅ Daily & monthly EMI with full schedule',
-                '✅ Auto start & end date calculation',
-                '✅ Pie chart + bar chart breakdown',
-                '✅ Copy, print & share your plan',
-              ].map(t => (
-                <div key={t} className="text-blue-100/80 text-sm font-medium">{t}</div>
-              ))}
-            </div>
-
-            <Link to="/profit-calculator"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-extrabold text-white text-lg shadow-2xl shadow-brand-gold/20 hover:-translate-y-1 transition-all duration-300 group"
-              style={{ background: 'linear-gradient(135deg,#F0A500 0%,#e07b00 100%)' }}>
-              <GiTwoCoins className="text-xl" />
-              Open Finance Planner
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
-
-          {/* ─── Right: Live mini preview ─── */}
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}>
-
-            <div className="rounded-3xl border border-white/10 p-7 shadow-2xl"
-              style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)' }}>
-
-              <div className="flex items-center justify-between mb-6 pb-5 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-brand-gold/20 flex items-center justify-center">
-                    <GiTwoCoins className="text-brand-gold text-lg" />
-                  </div>
-                  <div>
-                    <div className="text-white font-extrabold text-sm">Sample Loan Plan</div>
-                    <div className="text-gray-400 text-xs">Daily Profit Model</div>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          {/* Controls */}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="lg:col-span-7 bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
+            
+            <div className="space-y-10">
+              {/* Loan Amount */}
+              <div>
+                <div className="flex justify-between items-end mb-4">
+                  <label className="text-brand-navy font-bold flex items-center gap-2">
+                    <FaRupeeSign className="text-gray-400" /> Loan Amount
+                  </label>
+                  <div className="text-2xl font-black text-brand-royal">₹{amount.toLocaleString('en-IN')}</div>
                 </div>
-                <span className="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">Live Preview</span>
-              </div>
-
-              {[
-                { label: 'Loan Amount',     val: `₹${loanAmt.toLocaleString('en-IN')}`, color: 'text-blue-300' },
-                { label: 'Profit (Fixed)',  val: `₹${profit.toLocaleString('en-IN')}`,  color: 'text-brand-gold' },
-                { label: 'Total Collection',val: `₹${total.toLocaleString('en-IN')}`,  color: 'text-emerald-400', xl: true },
-                { label: 'Daily EMI',       val: `₹${daily}`,                           color: 'text-white' },
-                { label: 'Total Days',      val: `${days} days`,                        color: 'text-purple-400' },
-              ].map(({ label, val, color, xl }) => (
-                <div key={label} className="flex justify-between items-center border-b border-white/5 py-3.5 last:border-0">
-                  <span className="text-blue-200/60 text-sm">{label}</span>
-                  <span className={`${color} ${xl ? 'font-extrabold text-lg' : 'font-bold'}`}>{val}</span>
-                </div>
-              ))}
-
-              {/* mini day bar */}
-              <div className="mt-6">
-                <div className="flex justify-between text-xs text-blue-300/60 mb-2">
-                  <span>Collection Progress</span>
-                  <span>Day 1 of {days}</span>
-                </div>
-                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                  <motion.div initial={{ width: 0 }} whileInView={{ width: `${(1/days)*100}%` }}
-                    viewport={{ once: true }} transition={{ duration: 1.5, ease: 'easeOut' }}
-                    className="h-full bg-gradient-to-r from-brand-gold to-amber-400 rounded-full" />
+                <input type="range" min="100000" max="50000000" step="10000" value={amount} onChange={e => setAmount(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-royal" />
+                <div className="flex justify-between mt-2 text-xs text-gray-400 font-semibold">
+                  <span>₹1 Lakh</span>
+                  <span>₹5 Cr</span>
                 </div>
               </div>
 
-              <Link to="/profit-calculator"
-                className="mt-6 flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-extrabold text-brand-navy text-sm transition-all hover:brightness-110"
-                style={{ background: 'linear-gradient(135deg,#F0A500,#FFD700)' }}>
-                Try With Your Loan Amount →
-              </Link>
+              {/* Interest Rate */}
+              <div>
+                <div className="flex justify-between items-end mb-4">
+                  <label className="text-brand-navy font-bold flex items-center gap-2">
+                    <FaPercent className="text-gray-400" /> Interest Rate (p.a.)
+                  </label>
+                  <div className="text-2xl font-black text-brand-royal">{rate}%</div>
+                </div>
+                <input type="range" min="5" max="25" step="0.1" value={rate} onChange={e => setRate(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-royal" />
+                <div className="flex justify-between mt-2 text-xs text-gray-400 font-semibold">
+                  <span>5%</span>
+                  <span>25%</span>
+                </div>
+              </div>
+
+              {/* Tenure */}
+              <div>
+                <div className="flex justify-between items-end mb-4">
+                  <label className="text-brand-navy font-bold flex items-center gap-2">
+                    <FaCalendarAlt className="text-gray-400" /> Tenure (Years)
+                  </label>
+                  <div className="text-2xl font-black text-brand-royal">{years} Years</div>
+                </div>
+                <input type="range" min="1" max="30" step="1" value={years} onChange={e => setYears(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-royal" />
+                <div className="flex justify-between mt-2 text-xs text-gray-400 font-semibold">
+                  <span>1 Year</span>
+                  <span>30 Years</span>
+                </div>
+              </div>
             </div>
           </motion.div>
+
+          {/* Results */}
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="lg:col-span-5 bg-brand-navy rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden flex flex-col justify-center">
+            
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px]" />
+            <div className="absolute -top-32 -right-32 w-64 h-64 bg-brand-royal/30 rounded-full blur-[80px]" />
+
+            <div className="relative z-10 space-y-8">
+              <div>
+                <div className="text-blue-200/70 font-semibold uppercase tracking-widest text-sm mb-2">Monthly EMI</div>
+                <div className="text-4xl md:text-5xl font-black text-white flex items-center">
+                  ₹<AnimNum value={res.emi} />
+                </div>
+              </div>
+
+              <div className="h-px w-full bg-white/10" />
+
+              <div>
+                <div className="text-blue-200/70 font-semibold text-sm mb-1">Total Interest Amount</div>
+                <div className="text-2xl font-bold text-brand-royal">
+                  ₹<AnimNum value={res.totalInterest} />
+                </div>
+              </div>
+              
+              <div>
+                <div className="text-blue-200/70 font-semibold text-sm mb-1">Total Repayment Amount</div>
+                <div className="text-2xl font-bold text-white">
+                  ₹<AnimNum value={res.totalPayment} />
+                </div>
+              </div>
+
+              <button className="w-full py-4 rounded-xl font-extrabold text-white text-lg bg-brand-royal hover:bg-blue-700 shadow-lg shadow-brand-royal/30 transition-all mt-4">
+                Apply for Loan Now
+              </button>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
   );
 };
 
-export default FinancePlannerCTA;
+export default EmiCalcPreview;
