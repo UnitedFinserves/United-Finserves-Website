@@ -6,11 +6,11 @@ import heroFamily from '../../assets/images/hero_family_1782999569602.png';
 
 const slides = [
   heroFamily,
-  '/public/images/Home Loan.png', // Business meeting
+  '/images/Home Loan.png', // Business meeting
   'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=2000', // Students/Education
   'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=2000', // Beautiful home
-  '/public/images/Vehicle Loan.png',
-  '/public/images/Project-Loan.png',
+  '/images/Vehicle Loan.png',
+  '/images/Project-Loan.png',
 ];
 
 const bottomServices = [

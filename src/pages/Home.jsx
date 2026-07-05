@@ -19,7 +19,7 @@ const steps = [
   { n: '02', title: 'Document Verification', desc: 'Upload minimal documents digitally — fully paperless and secure.', emoji: '🔍', img: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=400' },
   { n: '03', title: 'Approval', desc: 'Our advisor reviews your profile and matches you with the best lender.', emoji: '✅', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=400' },
   { n: '04', title: 'Disbursement', desc: 'Loan amount credited to your account within 24–72 hours.', emoji: '🚀', img: 'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?auto=format&fit=crop&q=80&w=400' },
-  { n: '05', title: 'Disbursement', desc: 'Loan amount credited to your account within 24–72 hours.', emoji: '🚀', img: '/public/images/Project-Loan.png' }, ``
+  { n: '05', title: 'Disbursement', desc: 'Loan amount credited to your account within 24–72 hours.', emoji: '🚀', img: '/images/Project-Loan.png' }, ``
 ];
 
 const Home = () => (

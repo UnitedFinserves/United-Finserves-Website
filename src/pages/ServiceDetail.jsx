@@ -18,11 +18,11 @@ const iconMap = {
 
 const imgMap = {
   family_happy: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=2000',
-  business_meeting: '/public/images/Business_Loan.png',
-  family_home: '/public/images/Home Loan.png',
-  mortgage_keys: 'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&q=80&w=2000',
-  car_delivery: '/public/images/Vehicle Loan.png',
-  construction_site: '/public/images/Project-Loan.png',
+  business_meeting: '/images/Business_Loan.png',
+  family_home: '/images/Home Loan.png',
+  dream_home: '/images/Home Loan.png',
+  car_delivery: '/images/Vehicle Loan.png',
+  construction_site: '/images/Project-Loan.png',
   student_studying: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=2000',
   business_office: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000',
   commercial_property: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
