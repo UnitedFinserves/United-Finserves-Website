@@ -1,37 +1,35 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { 
-  FaPiggyBank, FaBriefcase, FaHome, FaCity, FaCar, 
-  FaBuilding, FaGraduationCap, FaCogs, FaChartPie, 
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  FaPiggyBank, FaBriefcase, FaHome, FaCity, FaCar,
+  FaBuilding, FaGraduationCap, FaCogs, FaChartPie,
   FaCommentsDollar, FaShieldAlt, FaChartLine, FaArrowRight
 } from 'react-icons/fa';
 
 const allServices = [
-  { id: 'personal-loan',       title: 'Personal Loan',        desc: 'Quick, hassle-free loans for your immediate personal needs — medical, travel, wedding, or anything else.',       icon: FaPiggyBank,    color: 'from-blue-500 to-blue-700'    },
-  { id: 'business-loan',       title: 'Business Loan',        desc: 'Fuel your business growth with tailored working capital and expansion financing at competitive rates.',            icon: FaBriefcase,    color: 'from-indigo-500 to-indigo-700' },
-  { id: 'home-loan',           title: 'Home Loan',            desc: 'Turn your dream home into reality with the best interest rates and fast processing.',                              icon: FaHome,         color: 'from-emerald-500 to-emerald-700' },
-  { id: 'mortgage-loan',       title: 'Mortgage / LAP',       desc: 'Unlock the full value of your property to secure substantial funding at the lowest possible rates.',               icon: FaCity,         color: 'from-blue-500 to-blue-700'   },
-  { id: 'vehicle-loan',        title: 'Vehicle Loan',         desc: 'Drive your dream car or bike home today with our fast and easy auto loan approvals.',                              icon: FaCar,          color: 'from-rose-500 to-rose-700'     },
-  { id: 'project-loan',        title: 'Project Loan',         desc: 'Large-scale infrastructure and project financing to bring your biggest ambitions to life.',                        icon: FaBuilding,     color: 'from-cyan-500 to-cyan-700'     },
-  { id: 'education-loan',      title: 'Education Loan',       desc: 'Invest in your future — flexible education financing for top colleges in India and abroad.',                       icon: FaGraduationCap, color: 'from-purple-500 to-purple-700' },
-  { id: 'working-capital',     title: 'Working Capital',      desc: 'Keep your business running smoothly with our fast working capital solutions.',                                     icon: FaCogs,          color: 'from-teal-500 to-teal-700'    },
-  { id: 'lap',                 title: 'Loan Against Property',desc: 'Get maximum funding against your residential or commercial property at the best LTV ratio.',                      icon: FaChartPie,     color: 'from-orange-500 to-orange-700' },
-  { id: 'financial-consulting',title: 'Financial Consulting', desc: 'Expert advisory to help you choose the right product, negotiate rates, and improve your CIBIL score.',            icon: FaCommentsDollar, color: 'from-blue-400 to-blue-600'   },
-  { id: 'insurance',           title: 'Insurance Advisory',   desc: 'Protect your loans and your family with the right life and term insurance plan from top insurers.',               icon: FaShieldAlt,    color: 'from-green-500 to-green-700'   },
-  { id: 'investment-planning', title: 'Investment Planning',  desc: 'Grow your wealth with strategic investment advice aligned to your risk appetite and financial goals.',             icon: FaChartLine,    color: 'from-violet-500 to-violet-700' },
+  { id: 'personal-loan', title: 'Personal Loan', desc: 'Quick, hassle-free loans for your immediate personal needs — medical, travel, wedding, or anything else.', icon: FaPiggyBank, color: 'from-brand-royal to-brand-royal' },
+  { id: 'business-loan', title: 'Business Loan', desc: 'Fuel your business growth with tailored working capital and expansion financing at competitive rates.', icon: FaBriefcase, color: 'from-indigo-500 to-indigo-700' },
+  { id: 'home-loan', title: 'Home Loan', desc: 'Turn your dream home into reality with the best interest rates and fast processing.', icon: FaHome, color: 'from-emerald-500 to-emerald-700' },
+  { id: 'mortgage-lap', title: 'Mortgage / LAP', desc: 'Unlock the full value of your property to secure substantial funding at the lowest possible rates.', icon: FaCity, color: 'from-brand-royal to-brand-royal' },
+  { id: 'vehicle-loan', title: 'Vehicle Loan', desc: 'Drive your dream car or bike home today with our fast and easy auto loan approvals.', icon: FaCar, color: 'from-rose-500 to-rose-700' },
+  { id: 'project-loan', title: 'Project Loan', desc: 'Large-scale infrastructure and project financing to bring your biggest ambitions to life.', icon: FaBuilding, color: 'from-cyan-500 to-cyan-700' },
+  { id: 'education-loan', title: 'Education Loan', desc: 'Invest in your future — flexible education financing for top colleges in India and abroad.', icon: FaGraduationCap, color: 'from-purple-500 to-purple-700' },
+  { id: 'working-capital', title: 'Working Capital', desc: 'Keep your business running smoothly with our fast working capital solutions.', icon: FaCogs, color: 'from-teal-500 to-teal-700' },
+  { id: 'loan-against-property', title: 'Loan Against Property', desc: 'Get maximum funding against your residential or commercial property at the best LTV ratio.', icon: FaChartPie, color: 'from-orange-500 to-orange-700' },
 ];
 
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
 const Services = () => {
   const [hovered, setHovered] = useState(null);
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-[#F4F7FB] min-h-screen">
+    <div className="bg-brand-light min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="relative pt-32 pb-28 bg-[#F4F7FB] overflow-hidden">
+      <div className="relative pt-16 pb-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #F6F9FF 0%, #EDF4FF 55%, #E8F0FF 100%)' }}>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(26,86,219,0.1),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(37,99,235,0.1),transparent_60%)]" />
         {/* Floating orbs */}
@@ -68,6 +66,7 @@ const Services = () => {
               <motion.div key={svc.id} {...fadeUp} transition={{ duration: 0.4, delay: index * 0.05 }}
                 onMouseEnter={() => setHovered(svc.id)}
                 onMouseLeave={() => setHovered(null)}
+                onClick={() => navigate(`/services/${svc.id}`)}
                 className="group relative bg-white rounded-3xl p-7 shadow-sm hover:shadow-2xl transition-all duration-400 border border-gray-100 overflow-hidden cursor-pointer flex flex-col">
 
                 {/* Gradient overlay on hover */}
@@ -85,10 +84,10 @@ const Services = () => {
                   {svc.desc}
                 </p>
 
-                <Link to="/contact"
+                <span
                   className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-royal transition-colors">
                   Get Started <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </span>
               </motion.div>
             );
           })}
@@ -106,7 +105,7 @@ const Services = () => {
             Talk to our financial expert for free. We'll analyze your profile and recommend the best product within minutes.
           </p>
           <Link to="/contact"
-            className="inline-block px-10 py-4 bg-brand-royal hover:bg-blue-700 text-white font-extrabold rounded-2xl shadow-xl shadow-brand-royal/30 hover:-translate-y-1 transition-all duration-300 text-lg">
+            className="inline-block px-10 py-4 bg-brand-royal hover:bg-brand-royal text-white font-extrabold rounded-2xl shadow-xl shadow-brand-royal/30 hover:-translate-y-1 transition-all duration-300 text-lg">
             Book a Free Call →
           </Link>
         </div>

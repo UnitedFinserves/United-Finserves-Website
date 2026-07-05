@@ -1,0 +1,6 @@
+
+			<div id="ast-desktop-header" data-toggle-type="dropdown">
+	</div> <!-- Main Header Bar Wrap -->
+<div id="ast-mobile-header" class="ast-mobile-header-wrap " data-type="dropdown">
+	</div>
+		

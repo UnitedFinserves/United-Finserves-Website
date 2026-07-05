@@ -33,7 +33,7 @@ const FloatingCoins = () => (
       >
         <div
           style={{ width: c.size, height: c.size }}
-          className="rounded-full bg-gradient-to-br from-yellow-300 to-blue-500 shadow-lg shadow-blue-400/40 flex items-center justify-center text-brand-navy font-black text-xs border-2 border-yellow-200/60"
+          className="rounded-full bg-gradient-to-br from-yellow-300 to-brand-royal shadow-lg shadow-blue-400/40 flex items-center justify-center text-brand-navy font-black text-xs border-2 border-yellow-200/60"
         >
           ₹
         </div>
@@ -43,7 +43,7 @@ const FloatingCoins = () => (
     {[15, 55, 82].map((x, i) => (
       <motion.div
         key={`note-${i}`}
-        className="absolute text-green-400/30 font-black text-2xl select-none"
+        className="absolute text-brand-green/30 font-black text-2xl select-none"
         style={{ left: `${x}%`, top: '90%' }}
         animate={{ y: [0, -700], x: [0, (i - 1) * 40], opacity: [0, 0.5, 0], rotate: [0, 15, -10] }}
         transition={{ duration: 7 + i, repeat: Infinity, delay: i * 2.5, ease: 'easeOut' }}
@@ -58,9 +58,9 @@ const FloatingCoins = () => (
    VIRTUAL FINANCE ASSISTANT
 ───────────────────────────────────────────── */
 const MOODS = {
-  idle:    { emoji: '😊', msg: 'Hello! I\'m your Finance Assistant.', color: 'from-blue-500 to-indigo-600' },
+  idle:    { emoji: '😊', msg: 'Hello! I\'m your Finance Assistant.', color: 'from-brand-royal to-indigo-600' },
   happy:   { emoji: '🎉', msg: 'Great choice! Your plan looks perfect.', color: 'from-emerald-500 to-teal-600' },
-  money:   { emoji: '💰', msg: 'You can easily manage this loan!', color: 'from-blue-500 to-yellow-600' },
+  money:   { emoji: '💰', msg: 'You can easily manage this loan!', color: 'from-brand-royal to-yellow-600' },
   think:   { emoji: '🤔', msg: 'Calculating your best plan…', color: 'from-purple-500 to-violet-600' },
   success: { emoji: '🚀', msg: 'Calculation complete! Excellent plan!', color: 'from-green-500 to-emerald-600' },
   wow:     { emoji: '✨', msg: 'Awesome! Perfect financial strategy!', color: 'from-pink-500 to-rose-600' },
@@ -169,7 +169,7 @@ const GlassSlider = ({ value, onChange, min, max, step }) => {
       className="w-full h-2 rounded-full cursor-pointer outline-none appearance-none"
       style={{
         '--value-percent': `${pct}%`,
-        background: `linear-gradient(to right,#1A56DB ${pct}%,rgba(255,255,255,0.15) ${pct}%)`
+        background: `linear-gradient(to right,#0E5CCF ${pct}%,rgba(255,255,255,0.15) ${pct}%)`
       }}
     />
   );
@@ -268,8 +268,8 @@ const InterestCalc = () => {
 
   /* ── Pie Chart Data ── */
   const pieData = [
-    { name: 'Principal', value: calc.P, color: '#1A56DB' },
-    { name: 'Interest Amount',    value: calc.interest, color: '#1A56DB' },
+    { name: 'Principal', value: calc.P, color: '#0E5CCF' },
+    { name: 'Interest Amount',    value: calc.interest, color: '#0E5CCF' },
   ];
 
   /* ── Copy Summary ── */
@@ -301,7 +301,7 @@ const InterestCalc = () => {
             >
               <div className="text-6xl mb-3">🎉</div>
               <div className="text-2xl font-extrabold">Calculation Complete!</div>
-              <div className="text-sm text-green-100 mt-1">Your repayment plan is ready.</div>
+              <div className="text-sm text-brand-green mt-1">Your repayment plan is ready.</div>
             </motion.div>
           </motion.div>
         )}
@@ -314,14 +314,14 @@ const InterestCalc = () => {
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-royal to-blue-400 mb-5 shadow-2xl shadow-brand-royal/30"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-royal to-brand-royal mb-5 shadow-2xl shadow-brand-royal/30"
           >
             <GiTwoCoins className="text-white text-3xl" />
           </motion.div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-brand-navy mb-3 leading-tight">
             Virtual Finance <span className="text-brand-royal">Calculator</span>
           </h1>
-          <p className="text-blue-200/70 text-lg max-w-xl mx-auto">
+          <p className="text-brand-royal/70 text-lg max-w-xl mx-auto">
             Interest Amount-based loan planner — daily & monthly EMI with live payment schedule
           </p>
         </motion.div>
@@ -439,8 +439,8 @@ const InterestCalc = () => {
             {/* Quick Stats Pills */}
             <div className="w-full space-y-3">
               {[
-                { label: 'Principal', val: calc.P, icon: '🏦', color: 'from-blue-600 to-blue-800' },
-                { label: 'Interest Amount',    val: calc.interest, icon: '📈', color: 'from-blue-500 to-blue-700' },
+                { label: 'Principal', val: calc.P, icon: '🏦', color: 'from-brand-royal to-brand-royal' },
+                { label: 'Interest Amount',    val: calc.interest, icon: '📈', color: 'from-brand-royal to-brand-royal' },
                 { label: 'Total',     val: calc.total, icon: '💰', color: 'from-emerald-600 to-emerald-800' },
               ].map(({ label, val, icon, color }) => (
                 <motion.div key={label} layout
@@ -458,7 +458,7 @@ const InterestCalc = () => {
             <div className="relative w-32 h-32">
               <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
                 <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" />
-                <motion.circle cx="60" cy="60" r="50" fill="none" stroke="#1A56DB" strokeWidth="12"
+                <motion.circle cx="60" cy="60" r="50" fill="none" stroke="#0E5CCF" strokeWidth="12"
                   strokeLinecap="round"
                   strokeDasharray={`${2 * Math.PI * 50}`}
                   key={calc.interest}
@@ -471,7 +471,7 @@ const InterestCalc = () => {
                 <span className="text-brand-royal font-black text-xl">
                   {Math.round((calc.interest / calc.total) * 100) || 0}%
                 </span>
-                <span className="text-blue-300 text-[10px] uppercase tracking-wide">Interest Amount</span>
+                <span className="text-brand-royal text-[10px] uppercase tracking-wide">Interest Amount</span>
               </div>
             </div>
           </motion.div>
@@ -519,7 +519,7 @@ const InterestCalc = () => {
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { icon: FaCopy,     label: copied ? 'Copied!' : 'Copy',  action: copySummary,       color: 'from-blue-600 to-blue-700' },
+                { icon: FaCopy,     label: copied ? 'Copied!' : 'Copy',  action: copySummary,       color: 'from-brand-royal to-brand-royal' },
                 { icon: FaPrint,    label: 'Print',   action: () => window.print(),   color: 'from-purple-600 to-purple-700' },
               ].map(({ icon: Icon, label, action, color }) => (
                 <motion.button key={label} onClick={action} whileTap={{ scale: 0.95 }} whileHover={{ scale: 1.03 }}
@@ -532,7 +532,7 @@ const InterestCalc = () => {
             {/* Apply CTA */}
             <motion.a href="/contact" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
               className="block text-center py-4 rounded-2xl font-extrabold text-white text-lg shadow-2xl shadow-brand-royal/30"
-              style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #1d4ed8 100%)' }}>
+              style={{ background: 'linear-gradient(135deg, #0E5CCF 0%, #0E5CCF 100%)' }}>
               🚀 Apply for This Loan
             </motion.a>
           </motion.div>
@@ -588,12 +588,12 @@ const InterestCalc = () => {
                             <td className="py-3 px-4 text-gray-500 font-mono text-xs">{row.num}</td>
                             <td className="py-3 px-4 text-brand-navy font-medium">{row.date}</td>
                             <td className="py-3 px-4 text-right text-brand-royal font-bold">₹{row.amount.toLocaleString('en-IN')}</td>
-                            <td className="py-3 px-4 text-right text-blue-200/70">₹{row.outstanding.toLocaleString('en-IN')}</td>
+                            <td className="py-3 px-4 text-right text-brand-royal/70">₹{row.outstanding.toLocaleString('en-IN')}</td>
                             <td className="py-3 px-4 text-center">
                               <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                                 row.status === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' :
                                 row.status === 'Due'  ? 'bg-brand-royal/20 text-brand-royal' :
-                                'bg-blue-500/10 text-gray-500'}`}>
+                                'bg-brand-royal/10 text-gray-500'}`}>
                                 {row.status}
                               </span>
                             </td>
@@ -629,7 +629,7 @@ const InterestCalc = () => {
                       {pieData.map(d => (
                         <div key={d.name} className="flex items-center gap-2">
                           <div className="w-3 h-3 rounded-full" style={{ background: d.color }} />
-                          <span className="text-blue-200/70 text-xs">{d.name}: ₹{d.value.toLocaleString('en-IN')}</span>
+                          <span className="text-brand-royal/70 text-xs">{d.name}: ₹{d.value.toLocaleString('en-IN')}</span>
                         </div>
                       ))}
                     </div>
@@ -647,12 +647,12 @@ const InterestCalc = () => {
                           tickFormatter={v => `₹${(v/1000).toFixed(0)}k`} />
                         <RTooltip formatter={(v) => `₹${Number(v).toLocaleString('en-IN')}`}
                           contentStyle={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, color: '#000' }} />
-                        <Bar dataKey="amount" fill="#1A56DB" radius={[6,6,0,0]} />
+                        <Bar dataKey="amount" fill="#0E5CCF" radius={[6,6,0,0]} />
                         <Bar dataKey="outstanding" fill="#60A5FA" radius={[6,6,0,0]} opacity={0.6} />
                       </BarChart>
                     </ResponsiveContainer>
                     <div className="flex justify-center gap-6 mt-2">
-                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-[#1A56DB]" /><span className="text-gray-500 text-xs">EMI Collected</span></div>
+                      <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-[#0E5CCF]" /><span className="text-gray-500 text-xs">EMI Collected</span></div>
                       <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-[#60A5FA]" /><span className="text-gray-500 text-xs">Outstanding</span></div>
                     </div>
                   </div>

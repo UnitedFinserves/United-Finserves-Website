@@ -28,7 +28,7 @@ const stats = [
 ];
 
 const StatsSection = () => (
-  <section className="py-20 bg-white border-b border-gray-100">
+  <section className="pt-28 pb-20 bg-white border-b border-gray-100">
     <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-16">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 divide-x divide-gray-100">
         {stats.map((s, i) => (

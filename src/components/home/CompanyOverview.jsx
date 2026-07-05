@@ -6,7 +6,7 @@ import consultationImg from '../../assets/images/consultation_1782999579137.png'
 
 const CompanyOverview = () => (
   <section className="py-24 bg-white relative overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(#1A56DB06_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+    <div className="absolute inset-0 bg-[radial-gradient(#0E5CCF06_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
 
     <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-16 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -56,7 +56,7 @@ const CompanyOverview = () => (
           </div>
 
           <Link to="/about"
-            className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-extrabold text-white text-lg bg-brand-royal hover:bg-blue-700 shadow-xl shadow-brand-royal/30 transition-all duration-300 hover:-translate-y-1">
+            className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-extrabold text-white text-lg bg-brand-royal hover:bg-brand-royal shadow-xl shadow-brand-royal/30 transition-all duration-300 hover:-translate-y-1">
             Discover Our Story
             <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Link>

@@ -12,7 +12,7 @@ const testimonials = [
     content: 'United Finserves helped me secure a ₹25 lakh business loan in just 48 hours. The process was completely transparent and the team supported me at every step. Best financial partner I\'ve ever had!',
     rating: 5,
     loan: '₹25 Lakh Business Loan',
-    color: 'from-blue-500 to-indigo-600',
+    color: 'from-brand-royal to-indigo-600',
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const testimonials = [
     content: 'Their financial consulting completely changed how I manage my investments. I\'ve seen 22% portfolio growth this year alone. I recommend United Finserves to every business owner I meet.',
     rating: 5,
     loan: '₹15 Lakh Personal Loan',
-    color: 'from-blue-500 to-orange-600',
+    color: 'from-brand-royal to-orange-600',
   },
   {
     id: 4,

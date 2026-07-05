@@ -15,7 +15,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-xl bg-green-50 text-green-600 flex items-center justify-center text-2xl">
+          <div className="w-14 h-14 rounded-xl bg-green-50 text-brand-green flex items-center justify-center text-2xl">
             <FaEnvelope />
           </div>
           <div>

@@ -9,9 +9,9 @@ const contactItems = [
     label: 'Call Us',
     lines: ['+91 63964 26318', '+91 74170 86158'],
     href: 'tel:+916396426318',
-    color: 'from-blue-500 to-blue-700',
+    color: 'from-brand-royal to-brand-royal',
     bg: 'bg-blue-50',
-    border: 'border-blue-100',
+    border: 'border-brand-royal',
   },
   {
     icon: FaWhatsapp,
@@ -27,9 +27,9 @@ const contactItems = [
     label: 'Email Us',
     lines: ['ankitchauhan.1385.ac@gmail.com'],
     href: 'mailto:ankitchauhan.1385.ac@gmail.com',
-    color: 'from-blue-500 to-orange-600',
+    color: 'from-brand-royal to-orange-600',
     bg: 'bg-amber-50',
-    border: 'border-blue-100',
+    border: 'border-brand-royal',
   },
   {
     icon: FaMapMarkerAlt,
@@ -49,19 +49,40 @@ const ContactUs = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1200));
-    console.log(data);
-    setLoading(false);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 5000);
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycbyQIpcMsT5c6eJnj1yra9Zlnbe2_FoPYFV1ANEQfeWvMzQk3O5YkFNO-y0NuFUo9414/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.fullName || '',
+          mobile: data.phone || '',
+          email: data.email || '',
+          loanType: data.service || '',
+          amount: data.loanAmount || '',
+          income: '',
+          city: '',
+          state: '',
+          message: data.message || ''
+        })
+      });
+      setSubmitted(true);
+      reset();
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      console.error('Failed to submit form:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="bg-[#F4F7FB] min-h-screen">
+    <div className="bg-brand-light min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="relative pt-32 pb-28 overflow-hidden bg-[#F4F7FB]">
+      <div className="relative pt-16 pb-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #F6F9FF 0%, #EDF4FF 55%, #E8F0FF 100%)' }}>
         <div className="absolute inset-0 bg-[radial-gradient(rgba(26,86,219,0.1)_0%,transparent_65%)]" />
         <motion.div animate={{ scale: [1,1.2,1], opacity: [0.3,0.5,0.3] }} transition={{ duration: 8, repeat: Infinity }}
           className="absolute -top-24 -right-24 w-96 h-96 bg-brand-royal/10 rounded-full blur-[100px] pointer-events-none" />
@@ -201,7 +222,7 @@ const ContactUs = () => {
 
                   <motion.button type="submit" disabled={loading} whileTap={{ scale: 0.97 }}
                     className="w-full py-4 rounded-2xl font-extrabold text-white text-lg shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70"
-                    style={{ background: 'linear-gradient(135deg,#0B2D5E,#1A56DB)' }}>
+                    style={{ background: 'linear-gradient(135deg,#082B66,#0E5CCF)' }}>
                     {loading ? (
                       <span className="flex items-center justify-center gap-3">
                         <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
@@ -260,7 +281,7 @@ const ContactUs = () => {
               </div>
               <a href="tel:+916396426318"
                 className="mt-7 flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-extrabold text-white transition-all shadow-lg hover:-translate-y-0.5"
-                style={{ background: 'linear-gradient(135deg,#1A56DB,#1d4ed8)' }}>
+                style={{ background: 'linear-gradient(135deg,#0E5CCF,#0E5CCF)' }}>
                 📞 Call Now — Free Consult
               </a>
             </div>

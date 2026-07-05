@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.dist
 *.local
 
 # Editor directories and files
@@ -23,11 +24,24 @@ dist-ssr
 *.sln
 *.sw?
 
-# Screenshots and test outputs
+# Screenshots and test outputs (root-level only, NOT public/images)
 ss-*.png
 screenshot-*.png
-extract-*.cjs
-ss-*.cjs
-test-*.cjs
-*.txt
 /*.png
+
+# Vercel local config (not the vercel.json config file)
+.vercel
+
+# Keep utility/dev scripts out of repo
+apply-brand-update.cjs
+fix-ctas.cjs
+replace-colors.cjs
+strip-light-theme.cjs
+generate_data.js
+extract-all.cjs
+extract-emi.cjs
+extract-footer.cjs
+ss-all.cjs
+ss-profit.cjs
+screenshot-test.cjs
+test-scroll.cjs

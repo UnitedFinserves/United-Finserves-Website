@@ -3,15 +3,19 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   
-  /* Blue-focused professional palette */
-  --color-brand-navy:   #0B2D5E;   /* deep navy */
-  --color-brand-royal:  #1A56DB;   /* bright blue accent */
-  --color-brand-blue:   #2563EB;   /* primary blue CTA */
-  --color-brand-sky:    #EFF6FF;   /* lightest blue tint */
-  --color-brand-green:  #22C55E;   /* success green */
-  --color-brand-light:  #F4F7FB;   /* light background */
+  /* United Finserves Logo Palette */
+  --color-brand-navy:   #082B66;   /* Dark Navy Blue */
+  --color-brand-royal:  #0E5CCF;   /* Royal Blue */
+  --color-brand-gold:   #F5B21A;   /* Finance Gold */
+  --color-brand-gold-hover: #E8A300; /* Gold Hover */
+  --color-brand-green:  #4FD1A5;   /* Success Green */
+  --color-brand-light:  #F6F9FF;   /* Light Background */
+  
+  /* Aliases / Fallbacks */
+  --color-brand-blue:   #0E5CCF;
+  --color-brand-sky:    #F6F9FF;   
   --color-brand-gray:   #64748b;
-  --color-brand-dark:   #071A3C;   /* darkest navy */
+  --color-brand-dark:   #082B66;   
 }
 
 @layer base {
@@ -21,6 +25,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-brand-navy;
+  }
+
+  /* Pointer cursor on all interactive elements */
+  button, a, select, [role="button"], label[for], summary {
+    cursor: pointer;
   }
 }
 
@@ -32,13 +41,34 @@
     @apply bg-brand-royal/90 backdrop-blur-lg border border-white/10 shadow-xl;
   }
   .text-gradient-blue {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-royal to-brand-blue;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-royal to-brand-navy;
   }
   .btn-primary {
-    @apply px-8 py-4 rounded-2xl font-extrabold text-white bg-brand-royal hover:bg-brand-blue shadow-lg shadow-brand-royal/20 hover:-translate-y-0.5 transition-all duration-300;
+    @apply px-8 py-4 rounded-2xl font-extrabold text-brand-navy bg-brand-gold hover:bg-brand-gold-hover shadow-lg shadow-brand-gold/20 hover:-translate-y-0.5 transition-all duration-300;
   }
   .btn-outline {
     @apply px-8 py-4 rounded-2xl font-bold text-brand-navy border-2 border-gray-200 hover:border-brand-royal hover:text-brand-royal transition-all duration-300;
+  }
+
+  /* Premium Dark Section (Alternating Theme) */
+  .dark-premium-section {
+    background: linear-gradient(135deg, #021C24, #032C36, #063C46, #082B66);
+    @apply text-white relative overflow-hidden;
+  }
+  .dark-premium-section h1, .dark-premium-section h2, .dark-premium-section h3, .dark-premium-section h4, .dark-premium-section h5, .dark-premium-section h6 {
+    color: #FFFFFF;
+  }
+  .dark-premium-section p {
+    color: rgba(255,255,255,0.75);
+  }
+  .dark-premium-section .text-gray-600, .dark-premium-section .text-gray-500, .dark-premium-section .text-brand-navy {
+    color: rgba(255,255,255,0.75);
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -78,4 +108,15 @@ input[type="range"]::-webkit-slider-runnable-track {
     #BFDBFE var(--value-percent, 0%),
     #BFDBFE 100%
   );
+}
+
+/* Marquee Animation */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

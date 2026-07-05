@@ -10,18 +10,20 @@ import ServicesSection from '../components/home/ServicesSection';
 import EmiCalcPreview from '../components/home/EmiCalcPreview';
 import SuccessStoriesSection from '../components/home/SuccessStoriesSection';
 import BankingPartners from '../components/home/BankingPartners';
+import AppDownloadSection from '../components/home/AppDownloadSection';
 import ctaBg from '../assets/images/cta_bg_1782999589395.png';
 
 /* ── Process Steps ── */
 const steps = [
-  { n: '01', title: 'Apply Online',    desc: 'Fill a simple form with your details — takes less than 2 minutes.',       emoji: '📝', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400' },
-  { n: '02', title: 'Document Verification',   desc: 'Upload minimal documents digitally — fully paperless and secure.',   emoji: '🔍', img: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=400' },
-  { n: '03', title: 'Approval', desc: 'Our advisor reviews your profile and matches you with the best lender.',         emoji: '✅', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=400' },
-  { n: '04', title: 'Disbursement',  desc: 'Loan amount credited to your account within 24–72 hours.',                emoji: '🚀', img: 'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?auto=format&fit=crop&q=80&w=400' },
+  { n: '01', title: 'Apply Online', desc: 'Fill a simple form with your details — takes less than 2 minutes.', emoji: '📝', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400' },
+  { n: '02', title: 'Document Verification', desc: 'Upload minimal documents digitally — fully paperless and secure.', emoji: '🔍', img: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=400' },
+  { n: '03', title: 'Approval', desc: 'Our advisor reviews your profile and matches you with the best lender.', emoji: '✅', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=400' },
+  { n: '04', title: 'Disbursement', desc: 'Loan amount credited to your account within 24–72 hours.', emoji: '🚀', img: 'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?auto=format&fit=crop&q=80&w=400' },
+  { n: '05', title: 'Disbursement', desc: 'Loan amount credited to your account within 24–72 hours.', emoji: '🚀', img: '/public/images/Project-Loan.png' }, ``
 ];
 
 const Home = () => (
-  <div className="bg-[#F4F7FB]">
+  <div className="bg-white">
     <HeroSection />
     <StatsSection />
     <CompanyOverview />
@@ -30,7 +32,7 @@ const Home = () => (
 
     {/* ── How It Works (Section 6) ── */}
     <section className="py-28 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(#1A56DB06_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#0E5CCF06_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
       <div className="w-full max-w-[1500px] mx-auto px-6 lg:px-16 relative z-10">
         <div className="text-center mb-16">
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -49,7 +51,7 @@ const Home = () => (
             <motion.div key={i}
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              className="relative group bg-[#F4F7FB] rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:border-brand-royal/20 transition-all duration-500">
+              className="relative group bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:border-brand-royal/20 transition-all duration-500">
 
               {/* Connector line */}
               {i < steps.length - 1 && (
@@ -63,7 +65,7 @@ const Home = () => (
               </div>
 
               <div className="flex items-center gap-3 mb-5">
-                <span className="w-10 h-10 rounded-2xl bg-brand-navy text-brand-royal font-extrabold text-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span className="w-10 h-10 rounded-2xl bg-brand-navy text-white font-extrabold text-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   {s.n}
                 </span>
                 <span className="text-3xl">{s.emoji}</span>
@@ -78,33 +80,38 @@ const Home = () => (
 
     <SuccessStoriesSection />
     <BankingPartners />
+    <AppDownloadSection />
 
-    {/* ── Final CTA Banner ── */}
-    <section className="py-32 relative overflow-hidden bg-brand-navy">
+    {/* ── Final CTA Banner ── dark-premium-section */}
+    <section className="dark-premium-section py-32">
+      {/* Decorative waves */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 300C200 200 400 400 600 300C800 200 1000 400 1200 300L1440 300V600H0Z" fill="white" />
+        <path d="M0 400C250 300 500 500 750 400C1000 300 1200 500 1440 400V600H0Z" fill="white" opacity="0.5" />
+      </svg>
       <div className="absolute inset-0 z-0">
-        <img src={ctaBg} alt="Successful Business Owner" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/95 to-brand-navy/70 mix-blend-multiply" />
+        <img src={ctaBg} alt="Successful Business Owner" className="w-full h-full object-cover opacity-20" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
             Ready To Achieve Your<br />
-            <span className="text-brand-royal text-blue-400">Financial Goals?</span>
+            <span className="text-brand-gold">Financial Goals?</span>
           </h2>
 
-          <p className="text-gray-200 text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium drop-shadow-md">
+          <p className="text-white/75 text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Join thousands of satisfied clients who trust United Finserves. Get a customized loan offer with the lowest interest rates today.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/contact"
-              className="group flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-extrabold text-white text-lg shadow-2xl bg-brand-royal hover:bg-blue-600 transition-all duration-300 hover:-translate-y-1">
+              className="group flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-extrabold text-brand-navy text-lg shadow-[0_10px_30px_rgba(245,178,26,0.3)] bg-brand-gold hover:bg-brand-gold-hover hover:scale-105 transition-all duration-300">
               Apply For Loan <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <a href="tel:+916396426318"
-              className="flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-bold text-white text-lg border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-              <FaPhone className="text-blue-300" /> Contact Us
+              className="flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-bold text-white text-lg border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <FaPhone className="text-brand-gold" /> Contact Us
             </a>
           </div>
         </motion.div>
